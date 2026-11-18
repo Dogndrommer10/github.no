@@ -249,6 +249,22 @@ textarea.inp{resize:vertical;min-height:54px}
 .pages button{border:0;background:transparent;border-radius:9px;padding:8px 16px;font:600 14px var(--f-display);color:var(--muted);white-space:nowrap}
 .pages button[aria-selected="true"]{background:var(--grad);color:#fff}
 [hidden]{display:none !important}
+.sml{display:none}
+@media (max-width:520px){.lgl{display:none}.sml{display:inline}.pages button{padding:8px 13px}}
+/* Forside */
+.hub{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.hcard{position:relative;display:flex;flex-direction:column;gap:14px;text-align:left;border:1px solid var(--line);border-radius:18px;padding:26px 26px 22px;background:var(--card);color:var(--ink);overflow:hidden;min-height:260px;transition:transform .2s,border-color .2s,box-shadow .2s}
+.hcard::before{content:"";position:absolute;inset:0;background:radial-gradient(28rem 14rem at 100% 0%,color-mix(in srgb,var(--hc) 26%,transparent),transparent 70%);pointer-events:none}
+.hcard:hover{transform:translateY(-3px);border-color:var(--hc);box-shadow:0 10px 40px color-mix(in srgb,var(--hc) 25%,transparent)}
+.hcard>*{position:relative}
+.hcard .ic{font-size:30px;line-height:1}
+.hcard h2{margin:0;font:700 clamp(24px,3vw,32px)/1.1 var(--f-display)}
+.hcard p{margin:0;color:var(--muted);font-size:15px;max-width:42ch}
+.hcard .nums{display:flex;gap:22px;flex-wrap:wrap;margin-top:auto}
+.hcard .nums div{display:flex;flex-direction:column}
+.hcard .nums b{font:700 26px/1 var(--f-display);color:var(--hc)}
+.hcard .nums span{font-size:12px;color:var(--muted);margin-top:4px}
+.hcard .go{font:600 14px var(--f-display);color:var(--hc)}
 /* SoMe */
 .pf{--c:var(--muted)}
 .plat{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px;background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--ink);white-space:nowrap}
@@ -329,10 +345,14 @@ textarea.inp{resize:vertical;min-height:54px}
     </div>
   </header>
   <div class="pages" role="tablist" aria-label="Velg side">
-    <button type="button" role="tab" data-page="rel" aria-selected="true">Produksjon &amp; release</button>
-    <button type="button" role="tab" data-page="some" aria-selected="false">Sosiale medier</button>
+    <button type="button" role="tab" data-page="home" aria-selected="true">Forside</button>
+    <button type="button" role="tab" data-page="rel" aria-selected="false">Produksjon<span class="lgl"> &amp; release</span></button>
+    <button type="button" role="tab" data-page="some" aria-selected="false"><span class="lgl">Sosiale medier</span><span class="sml">SoMe</span></button>
   </div>
   <div id="banner"></div>
+  <div id="pgHome" style="display:contents" hidden>
+    <div class="hub" id="hub"></div>
+  </div>
   <div id="pgRel" style="display:contents">
   <div class="tabs" id="tabs"></div>
   <div class="toolbar">
@@ -446,7 +466,7 @@ const view = { artist:"alle", zoom:1, start: mondayOf(todayN - 14), person:"", p
 let posts = [];
 let modal = null; // {kind:'song'|'artist', draft, isNew, focusStep, armed}
 
-function readHash(){ const h=location.hash.replace(/^#/,""); view.page = h==="some" ? "some" : "rel"; if(view.page==="rel") view.artist = h.startsWith("artist-") ? h.slice(7) : "alle"; }
+function readHash(){ const h=location.hash.replace(/^#/,""); view.page = h==="some" ? "some" : (h==="alle" || h.startsWith("artist-")) ? "rel" : "home"; if(view.page==="rel") view.artist = h.startsWith("artist-") ? h.slice(7) : "alle"; }
 readHash();
 window.addEventListener("hashchange", ()=>{ readHash(); render(); });
 
@@ -493,6 +513,7 @@ function render(){
   if(view.artist!=="alle" && loaded.a && !artistById(view.artist)) view.artist="alle";
   renderPage();
   if(view.page==="some"){ renderSome(); return; }
+  if(view.page==="home"){ renderHome(); return; }
   renderTabs(); renderToolbar(); renderStats(); renderLegend(); renderTimeline(); renderTable();
 }
 
@@ -1030,12 +1051,33 @@ const sview = { month: null, mode: (window.matchMedia && matchMedia("(max-width:
 (function(){ const d=new Date(todayN*864e5); sview.month = {y:d.getUTCFullYear(), m:d.getUTCMonth()}; })();
 
 function renderPage(){
-  const some = view.page==="some";
-  document.querySelectorAll(".pages [data-page]").forEach(b=>b.setAttribute("aria-selected", String(b.dataset.page===view.page)));
-  $("pgRel").hidden = some; $("pgSome").hidden = !some;
-  $("newSong").hidden = some; $("newPost").hidden = !some; $("newIdea").hidden = !some;
-  $("pageTitle").innerHTML = some ? `Sosiale <em>medier</em>` : `Produksjon &amp; <em>release</em>`;
-  document.title = some ? "Døgndrømmer studio · Sosiale medier" : "Døgndrømmer studio";
+  const pgv = view.page, some = pgv==="some", rel = pgv==="rel", home = pgv==="home";
+  document.querySelectorAll(".pages [data-page]").forEach(b=>b.setAttribute("aria-selected", String(b.dataset.page===pgv)));
+  $("pgHome").hidden = !home; $("pgRel").hidden = !rel; $("pgSome").hidden = !some;
+  $("newSong").hidden = !rel; $("newPost").hidden = !some; $("newIdea").hidden = !some;
+  $("pageTitle").innerHTML = some ? `Sosiale <em>medier</em>` : rel ? `Produksjon &amp; <em>release</em>` : `Velkommen til <em>studio</em>`;
+  document.title = some ? "Døgndrømmer studio · Sosiale medier" : rel ? "Døgndrømmer studio · Produksjon" : "Døgndrømmer studio";
+}
+function renderHome(){
+  const active = songs.filter(s=>!progress(s).allDone).length;
+  const rels = [...songs.map(s=>({n:s.title,d:relOf(s)})), ...artists.map(a=>({n:a.name,d:a.releaseDate}))].filter(x=>x.d && dn(x.d)>=todayN).sort((a,b)=>dn(a.d)-dn(b.d));
+  const nr = rels[0];
+  const cp = posts.filter(x=>x.kind!=="ide");
+  const wk = cp.filter(x=>{ const n=dn(x.date); return n!=null && n>=todayN && n<=todayN+6; }).length;
+  const nIdeas = posts.filter(x=>x.kind==="ide").length;
+  $("hub").innerHTML = `
+    <button type="button" class="hcard" style="--hc:#ff3ea5" data-page-go="rel">
+      <span class="ic">🎛️</span><h2>Produksjon &amp; release</h2>
+      <p>Tidslinje for hver låt, fra demo og mix til master, cover, distribusjon og releasedag.</p>
+      <div class="nums"><div><b>${active}</b><span>låter i arbeid</span></div>${nr?`<div><b>${dn(nr.d)-todayN===0?"I dag":(dn(nr.d)-todayN)+" d"}</b><span>til «${esc(nr.n)}»</span></div>`:""}</div>
+      <span class="go">Åpne produksjon →</span>
+    </button>
+    <button type="button" class="hcard" style="--hc:#28e6e0" data-page-go="some">
+      <span class="ic">📱</span><h2>Sosiale medier</h2>
+      <p>Innholdskalender for Instagram, TikTok og resten, og en idébank for serier og kampanjer.</p>
+      <div class="nums"><div><b>${wk}</b><span>innlegg neste 7 dager</span></div><div><b>${nIdeas}</b><span>idéer i banken</span></div></div>
+      <span class="go">Åpne sosiale medier →</span>
+    </button>`;
 }
 const calPosts = () => posts.filter(x=>x.kind!=="ide" && (!sview.plat || (x.platforms||[]).includes(sview.plat)));
 const ideaPosts = () => posts.filter(x=>x.kind==="ide" && (!sview.series || (x.series||"")===sview.series)).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
@@ -1166,8 +1208,8 @@ const savePost   = x  => write("post", "upsert", toRow.post(x));
 const deletePost = id => write("post", "delete", id);
 
 document.addEventListener("click", async e=>{
-  const pg = e.target.closest(".pages [data-page]");
-  if(pg && !modal){ location.hash = pg.dataset.page==="some" ? "some" : (view.artist && view.artist!=="alle" ? "artist-"+view.artist : "alle"); return; }
+  const pg = e.target.closest(".pages [data-page],[data-page-go]");
+  if(pg && !modal){ const k = pg.dataset.page || pg.dataset.pageGo; location.hash = k==="some" ? "some" : k==="home" ? "start" : (view.artist && view.artist!=="alle" ? "artist-"+view.artist : "alle"); return; }
   const t = e.target.closest("[data-sx]"); if(!t) return;
   const a = t.dataset.sx;
   if(!modal){

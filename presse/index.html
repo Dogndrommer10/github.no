@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Presse — Døgndrømmer</title>
+<meta name="description" content="Pressemateriell for Døgndrømmer: bio, fakta, pressebilder og logo til nedlasting.">
+<meta property="og:title" content="Døgndrømmer — presse">
+<meta property="og:description" content="Bio, fakta, pressebilder og logo til nedlasting.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://dogndrommer10.github.io/preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2307080d'/%3E%3Ccircle cx='24' cy='32' r='11' fill='%23ff3ea5'/%3E%3Ccircle cx='40' cy='32' r='11' fill='%2328e6e0' fill-opacity='.85'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#ff3ea5; --pink-soft:#ff8fcf;
+    --teal:#28e6e0; --teal-soft:#8ff6f2;
+    --ink:#07080d; --panel:#0b0d16; --line:#1c1f30;
+    --txt:#e9e6f2; --dim:#9a95ad;
+    --display:'Space Grotesk','Avenir Next','Trebuchet MS', sans-serif;
+    --sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink); color:var(--txt); font-family:var(--sans); line-height:1.7; -webkit-font-smoothing:antialiased}
+  img{display:block; max-width:100%}
+  a{color:inherit}
+
+  nav{
+    position:sticky; top:0; z-index:40;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:14px 22px;
+    background:rgba(7,8,13,.82);
+    -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  }
+  nav .brand img{height:24px; filter:drop-shadow(0 0 6px rgba(255,62,165,.55))}
+  nav .back{font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; color:var(--dim)}
+  nav .back:hover{color:var(--pink-soft)}
+
+  header{padding:56px 22px 8px}
+  .wrap{max-width:1060px; margin:0 auto}
+  section{padding:48px 22px}
+  .kicker{font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:var(--pink-soft); margin-bottom:10px}
+  .kicker.teal{color:var(--teal-soft)}
+  h1,h2{font-family:var(--display); font-weight:700; color:#fdeef8; letter-spacing:-.015em; text-shadow:0 0 18px rgba(255,62,165,.3)}
+  h1{font-size:clamp(38px,7vw,68px); line-height:1.02; margin-bottom:16px}
+  h2{font-size:clamp(28px,4.4vw,44px); line-height:1.05; margin-bottom:26px}
+  h3{font-family:var(--display); font-size:20px; margin-bottom:8px; color:#fff}
+  .lead{color:#cfc9de; font-size:clamp(16px,2vw,19px); max-width:58ch}
+
+  .pill{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12px; letter-spacing:.16em; text-transform:uppercase; text-decoration:none;
+    padding:12px 22px; border-radius:999px; cursor:pointer;
+    border:1px solid currentColor; color:var(--pink-soft); background:rgba(7,8,13,.5);
+    transition:transform .2s, box-shadow .2s, background .2s; font-family:inherit;
+  }
+  .pill:hover{transform:translateY(-2px); box-shadow:0 0 22px rgba(255,62,165,.55); background:rgba(255,62,165,.12)}
+  .pill.teal{color:var(--teal-soft)}
+  .pill.teal:hover{box-shadow:0 0 22px rgba(40,230,224,.5); background:rgba(40,230,224,.1)}
+  .pill.solid{background:var(--pink); color:#fff; border-color:var(--pink)}
+  .pill.solid:hover{background:#ff5cb4}
+  .row{display:flex; gap:12px; flex-wrap:wrap; margin-top:26px}
+
+  /* fakta */
+  .facts{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden}
+  .fact{background:var(--panel); padding:20px 22px}
+  .fact dt{font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--dim); margin-bottom:6px}
+  .fact dd{color:#fff; font-size:15.5px; line-height:1.5}
+  .fact dd a{color:var(--pink-soft)}
+
+  /* bio */
+  .bio{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:26px 26px 22px; margin-bottom:18px}
+  .bio-head{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px}
+  .bio-head .kicker{margin:0}
+  .bio p{color:#cfc9de; max-width:68ch}
+  .bio p + p{margin-top:14px}
+  .copy{font-size:11px; letter-spacing:.14em; padding:8px 14px}
+
+  /* utgivelser */
+  .rel{display:grid; grid-template-columns:minmax(0,260px) 1fr; gap:34px; align-items:center}
+  .rel .cover{border-radius:10px; overflow:hidden; box-shadow:0 10px 40px rgba(255,62,165,.3)}
+  .tracks{list-style:none; border-top:1px solid var(--line)}
+  .tracks li{display:flex; justify-content:space-between; gap:16px; padding:14px 0; border-bottom:1px solid var(--line)}
+  .tracks .t{color:#fff; font-weight:600}
+  .tracks .d{color:var(--dim); font-size:14px; text-align:right}
+  .tracks .new{color:var(--pink-soft); font-size:11px; letter-spacing:.2em; text-transform:uppercase; margin-left:8px}
+  .credits{color:var(--dim); font-size:14px; margin-top:18px}
+
+  /* bilder */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px}
+  .shot{position:relative; border-radius:10px; overflow:hidden; background:var(--panel); border:1px solid var(--line)}
+  .shot .img{aspect-ratio:3/2; overflow:hidden}
+  .shot.tall .img{aspect-ratio:2/3}
+  .shot img{width:100%; height:100%; object-fit:cover; transition:transform .4s ease}
+  .shot:hover img{transform:scale(1.04)}
+  .shot .meta{display:flex; justify-content:space-between; align-items:center; padding:10px 14px; font-size:12px; color:var(--dim)}
+  .shot .meta a{color:var(--teal-soft); text-decoration:none; letter-spacing:.12em; text-transform:uppercase; font-size:11px}
+  .shot .meta a:hover{color:#fff}
+  .note{color:var(--dim); font-size:14px; margin-top:16px}
+
+  /* logo */
+  .logos{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+  .logo-card{border-radius:10px; overflow:hidden; border:1px solid var(--line); background:var(--panel)}
+  .logo-card .bg{height:150px; display:flex; align-items:center; justify-content:center; padding:24px}
+  .logo-card .bg img{max-height:100%}
+  .logo-card .bg.dark{background:#000}
+  .logo-card .bg.light{background:#f4f1f8}
+  .logo-card .meta{display:flex; justify-content:space-between; align-items:center; padding:10px 14px; font-size:13px}
+  .logo-card .meta span{color:var(--dim)}
+  .logo-card .meta a{color:var(--teal-soft); text-decoration:none; letter-spacing:.12em; text-transform:uppercase; font-size:11px; margin-left:12px}
+
+  /* kontakt */
+  #kontakt{text-align:center}
+  .mail{
+    display:inline-block; font-size:clamp(15px,3vw,22px); letter-spacing:.08em;
+    color:#fff; text-decoration:none; border:1px solid var(--pink); border-radius:8px;
+    padding:16px 30px; box-shadow:0 0 24px rgba(255,62,165,.3); margin-top:6px;
+  }
+  .mail:hover{background:rgba(255,62,165,.12)}
+  #kontakt .row{justify-content:center}
+
+  footer{padding:30px 22px 50px; text-align:center; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:#565165}
+
+  @media (max-width:820px){
+    header{padding:36px 18px 0}
+    section{padding:36px 18px}
+    .rel{grid-template-columns:1fr; gap:24px}
+    .rel .cover{max-width:260px}
+    .bio{padding:20px 18px 18px}
+    .grid{grid-template-columns:1fr 1fr; gap:10px}
+    .shot .meta{flex-direction:column; align-items:flex-start; gap:2px; padding:8px 10px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important} html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="../" aria-label="Døgndrømmer — til forsiden"><img src="../img/logo-hvit.svg" alt="Døgndrømmer"></a>
+  <a class="back" href="../">← Til forsiden</a>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Presse &amp; media</div>
+    <h1>Pressemateriell</h1>
+    <p class="lead">Norsk synthpop fra Drammen. Her finner du bio, fakta, pressebilder og logo, klart til bruk.</p>
+    <div class="row">
+      <a class="pill solid" href="dogndrommer-pressekit.zip" download>↓ Last ned alt (zip)</a>
+      <a class="pill teal" href="mailto:christian@dogndrommer.no">Kontakt oss</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ FAKTA ============ -->
+<section id="fakta">
+  <div class="wrap">
+    <div class="kicker teal">Kort fortalt</div>
+    <h2>Fakta</h2>
+    <dl class="facts">
+      <div class="fact"><dt>Sjanger</dt><dd>Synthpop / synthwave</dd></div>
+      <div class="fact"><dt>Fra</dt><dd>Drammen, Norge</dd></div>
+      <div class="fact"><dt>Medlemmer</dt><dd>Anniken Kullebund — vokal, tekst<br>Christian Sanders — vokal, produksjon, tekst</dd></div>
+      <div class="fact"><dt>Siste singel</dt><dd>«Million» — listet på New Music Friday</dd></div>
+      <div class="fact"><dt>Kommer</dt><dd>Debutalbumet «Døgndrøm»</dd></div>
+      <div class="fact"><dt>Booking &amp; presse</dt><dd><a href="mailto:christian@dogndrommer.no">christian@dogndrommer.no</a></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ BIO ============ -->
+<section id="bio">
+  <div class="wrap">
+    <div class="kicker">Til fri bruk</div>
+    <h2>Bio</h2>
+
+    <div class="bio">
+      <div class="bio-head"><div class="kicker teal">Kort</div><button class="pill teal copy" data-copy="bio-kort">Kopier</button></div>
+      <div id="bio-kort">
+        <p>Døgndrømmer er en norsk synthpop-duo fra Drammen, bestående av Anniken Kullebund og Christian Sanders. Med nostalgiske 80-tallssynths, EDM og store, fengende refrenger skaper de et neonbelyst univers der moderne pop møter retrodrømmer.</p>
+      </div>
+    </div>
+
+    <div class="bio">
+      <div class="bio-head"><div class="kicker teal">Lang</div><button class="pill teal copy" data-copy="bio-lang">Kopier</button></div>
+      <div id="bio-lang">
+        <p>Døgndrømmer er et norsk synthpop-prosjekt som blander nostalgiske 80-tallssynths, EDM og store, fengende refrenger. Inspirert av neonbelyste motorveier, VHS-estetikk og følelsen av å være fanget i et univers fra 1986, skaper duoen et univers der moderne pop møter retrodrømmer.</p>
+        <p>Bak prosjektet står Anniken Kullebund og Christian Sanders. Anniken var semifinalist i International Songwriting Competition i 2019 og har skrevet musikk siden hun var tolv. Christian har bakgrunn fra Ess i Ermet, med gull- og platinasalg, radiospilling og over 1000 konserter. I Døgndrømmer bygger han låter og visuelle verdener der 80-tallsnostalgi møter moderne pop.</p>
+        <p>Singelen «Million» ble listet på New Music Friday, og duoen jobber nå mot debutalbumet «Døgndrøm».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UTGIVELSER ============ -->
+<section id="utgivelser">
+  <div class="wrap">
+    <div class="kicker teal">Diskografi</div>
+    <h2>Utgivelser</h2>
+    <div class="rel">
+      <div class="cover"><img src="../img/bilde-04.jpg" alt="«Million» — singelcover" loading="lazy"></div>
+      <div>
+        <ul class="tracks">
+          <li><span class="t">Million <span class="new">Ny</span></span><span class="d">Singel · 6. november 2026</span></li>
+          <li><span class="t">Mer Enn Jeg Burde</span><span class="d">Singel · 21. august 2026</span></li>
+          <li><span class="t">Akkurat nå</span><span class="d">Singel</span></li>
+          <li><span class="t">Ta meg med</span><span class="d">Singel</span></li>
+        </ul>
+        <p class="credits">Produksjon: Christian Sanders og Jahn Alexander Gran · Mastering: Magnus Gulbrandsen, Jeløy Sound</p>
+        <div class="row">
+          <a class="pill" href="https://open.spotify.com/artist/3FU7RAennmDYtSlcC0DGY5" target="_blank" rel="noopener">▶ Spotify</a>
+          <a class="pill teal" href="../img/bilde-04.jpg" download="Dogndrommer-Million-cover.jpg">↓ Cover</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BILDER ============ -->
+<section id="bilder">
+  <div class="wrap">
+    <div class="kicker">Høy oppløsning</div>
+    <h2>Pressebilder</h2>
+    <div class="grid" id="grid"></div>
+    <p class="note">Bildene kan brukes fritt i omtale av Døgndrømmer.</p>
+  </div>
+</section>
+
+<!-- ============ LOGO ============ -->
+<section id="logo">
+  <div class="wrap">
+    <div class="kicker teal">Merkevare</div>
+    <h2>Logo</h2>
+    <div class="logos">
+      <div class="logo-card"><div class="bg dark"><img src="logo-rosa.svg" alt="Døgndrømmer-logo, neonrosa"></div>
+        <div class="meta"><span>Neonrosa</span><span><a href="logo-rosa.png" download="Dogndrommer-logo-rosa.png">PNG</a><a href="logo-rosa.svg" download="Dogndrommer-logo-rosa.svg">SVG</a></span></div></div>
+      <div class="logo-card"><div class="bg dark"><img src="logo-hvit.svg" alt="Døgndrømmer-logo, hvit"></div>
+        <div class="meta"><span>Hvit</span><span><a href="logo-hvit.png" download="Dogndrommer-logo-hvit.png">PNG</a><a href="logo-hvit.svg" download="Dogndrommer-logo-hvit.svg">SVG</a></span></div></div>
+      <div class="logo-card"><div class="bg light"><img src="logo-svart.svg" alt="Døgndrømmer-logo, svart"></div>
+        <div class="meta"><span>Svart</span><span><a href="logo-svart.png" download="Dogndrommer-logo-svart.png">PNG</a><a href="logo-svart.svg" download="Dogndrommer-logo-svart.svg">SVG</a></span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT ============ -->
+<section id="kontakt">
+  <div class="wrap">
+    <div class="kicker">Intervju, booking eller spørsmål?</div>
+    <h2>Ta kontakt</h2>
+    <a class="mail" href="mailto:christian@dogndrommer.no">christian@dogndrommer.no</a>
+    <div class="row">
+      <a class="pill" href="https://open.spotify.com/artist/3FU7RAennmDYtSlcC0DGY5" target="_blank" rel="noopener">▶ Spotify</a>
+      <a class="pill teal" href="https://www.tiktok.com/@dgndrmmer" target="_blank" rel="noopener">◆ TikTok</a>
+      <a class="pill" href="https://www.instagram.com/dogndrommer" target="_blank" rel="noopener">❑ Instagram</a>
+    </div>
+  </div>
+</section>
+
+<footer>Døgndrømmer · Drammen · est. 1986 i en annen tidslinje</footer>
+
+<script>
+  var PHOTOS = [
+    ["bilde-01","Duoen ved bilen",0],["bilde-05","Duoen i røyk",0],
+    ["bilde-06","Anniken",1],["bilde-07","Christian",1],
+    ["bilde-08","Fotoserie 1",0],["bilde-09","Fotoserie 2",0],["bilde-10","Fotoserie 3",0],
+    ["bilde-11","Fotoserie 4",0],["bilde-12","Fotoserie 5",0],["bilde-13","Fotoserie 6",0],
+    ["bilde-14","Fotoserie 7",0],["bilde-15","Fotoserie 8",1]
+  ];
+  var grid = document.getElementById('grid');
+  PHOTOS.forEach(function(p, i){
+    var src = '../img/' + p[0] + '.jpg';
+    var name = 'Dogndrommer-presse-' + String(i+1).padStart(2,'0') + '.jpg';
+    var d = document.createElement('div'); d.className = 'shot' + (p[2] ? ' tall' : '');
+    d.innerHTML = '<div class="img"><img loading="lazy" alt="Døgndrømmer — ' + p[1] + '" src="' + src + '"></div>' +
+      '<div class="meta"><span>' + p[1] + '</span><a href="' + src + '" download="' + name + '">↓ Last ned</a></div>';
+    grid.appendChild(d);
+  });
+
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.dataset.copy);
+      var text = Array.from(el.querySelectorAll('p')).map(function(p){ return p.textContent; }).join('\n\n');
+      var done = function(){ btn.textContent = 'Kopiert ✓'; setTimeout(function(){ btn.textContent = 'Kopier'; }, 1800); };
+      if (navigator.clipboard) { navigator.clipboard.writeText(text).then(done, function(){}); }
+    });
+  });
+</script>
+</body>
+</html>

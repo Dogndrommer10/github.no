@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <style>
 /* Layout: utgivelser i nedtrekksliste, nøkkeltall, horisontal tidslinje (låter = rader, steg = stolper, release = markør) og statusliste.
@@ -19,7 +19,7 @@
   --grad-hot:linear-gradient(135deg,#ff3ea5 0%,#28e6e0 100%);
   --f-display:"Space Grotesk", system-ui, sans-serif;
   --f-body:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --f-mono:"Space Mono", ui-monospace, Menlo, monospace;
+  --f-mono:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --lw:250px;
   color-scheme:dark;
 }
@@ -244,6 +244,65 @@ textarea.inp{resize:vertical;min-height:54px}
 .toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;z-index:80;max-width:calc(100% - 32px)}
 .loading{padding:40px;text-align:center;color:var(--muted)}
 
+/* Sidevalg */
+.pages{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--surface);align-self:flex-start;max-width:100%;overflow-x:auto}
+.pages button{border:0;background:transparent;border-radius:9px;padding:8px 16px;font:600 14px var(--f-display);color:var(--muted);white-space:nowrap}
+.pages button[aria-selected="true"]{background:var(--grad);color:#fff}
+[hidden]{display:none !important}
+/* SoMe */
+.pf{--c:var(--muted)}
+.plat{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px;background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--ink);white-space:nowrap}
+.plat::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--c)}
+.cal{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
+.cal-h{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--line)}
+.cal-h div{font:600 11px var(--f-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:8px 10px}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr)}
+.day{min-height:112px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:6px;display:flex;flex-direction:column;gap:4px;cursor:pointer;min-width:0}
+.day:nth-child(7n){border-right:0}
+.day.out{background:color-mix(in srgb,var(--bg) 55%,var(--surface))}
+.day.out .dnum{opacity:.4}
+.day:hover{background:var(--soft)}
+.dnum{font:600 12px var(--f-mono);color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.day.now .dnum b{background:var(--rec);color:#04201f;border-radius:999px;padding:0 7px}
+.day .relday{font:700 10px var(--f-mono);color:#FFD166;text-transform:uppercase}
+.post{border:0;text-align:left;width:100%;border-radius:6px;padding:4px 6px;font-size:12px;font-weight:600;line-height:1.25;background:color-mix(in srgb,var(--c) 16%,var(--card));border-left:3px solid var(--c);color:var(--ink);display:flex;flex-direction:column;gap:1px;min-width:0}
+.post span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.post small{font-size:10px;color:var(--muted);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.post.publisert{opacity:.55}
+.post.publisert span::before{content:"✓ "}
+.post:hover{filter:brightness(1.15)}
+.st{font:700 10px var(--f-mono);text-transform:uppercase;letter-spacing:.06em;border-radius:4px;padding:1px 6px;white-space:nowrap}
+.st.planlagt{color:var(--muted);border:1px dashed var(--muted)}
+.st.produseres{background:#7C5CFF;color:#fff}
+.st.klar{background:#28e6e0;color:#04201f}
+.st.publisert{background:#22A55B;color:#fff}
+.plist{display:flex;flex-direction:column;gap:14px}
+.wkh{font:700 13px var(--f-display);color:var(--muted);margin:2px 0 6px}
+.prow{display:grid;grid-template-columns:76px 1fr auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:10px;padding:10px 12px;cursor:pointer;width:100%;text-align:left;color:var(--ink)}
+.prow+.prow{margin-top:6px}
+.prow:hover{border-color:var(--muted)}
+.prow .dt{font:600 12px var(--f-mono);color:var(--muted);line-height:1.3}
+.prow .dt b{display:block;font:700 18px var(--f-display);color:var(--ink)}
+.prow .tt{font-weight:700;font-size:15px;overflow-wrap:anywhere}
+.prow .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;align-items:center;font-size:12px;color:var(--muted)}
+.ideas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.idea{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.idea h4{margin:0;font:700 16px/1.25 var(--f-display);overflow-wrap:anywhere}
+.idea p{margin:0;font-size:13px;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.idea .row2{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.idea .acts{display:flex;gap:6px;margin-top:auto;padding-top:4px}
+.series{font:700 10px var(--f-mono);text-transform:uppercase;letter-spacing:.08em;color:var(--accent)}
+.ifilter{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.secrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.secrow h2.sec{margin:0}
+@media (max-width:700px){
+  .day{min-height:64px;padding:4px}
+  .day .post{padding:0;height:6px;border-left:0;background:var(--c);border-radius:3px}
+  .day .post span,.day .post small{display:none}
+  .cal-h div{padding:6px 4px;text-align:center}
+  .prow{grid-template-columns:58px 1fr}
+  .prow .st{grid-column:2;justify-self:start}
+}
 @media (max-width:700px){
   :root{--lw:150px}
   .sr1{grid-template-columns:1fr 1fr}
@@ -260,14 +319,21 @@ textarea.inp{resize:vertical;min-height:54px}
   <header class="top">
     <div class="brand">
       <small><a class="logo" href="../" title="Til hjemmesiden" style="text-decoration:none">DØGN<span>DRØMMER</span></a> · Studio</small>
-      <h1>Produksjon &amp; <em>release</em></h1>
+      <h1 id="pageTitle">Produksjon &amp; <em>release</em></h1>
     </div>
     <div class="tgroup">
       <button class="btn primary" id="newSong" type="button">+ Ny låt</button>
+      <button class="btn" id="newIdea" type="button" data-sx="newIdea" hidden>+ Ny idé</button>
+      <button class="btn primary" id="newPost" type="button" data-sx="newPost" hidden>+ Nytt innlegg</button>
       <button class="btn ghost" id="logoutBtn" type="button" title="Logg ut av Døgndrømmer studio">Logg ut</button>
     </div>
   </header>
+  <div class="pages" role="tablist" aria-label="Velg side">
+    <button type="button" role="tab" data-page="rel" aria-selected="true">Produksjon &amp; release</button>
+    <button type="button" role="tab" data-page="some" aria-selected="false">Sosiale medier</button>
+  </div>
   <div id="banner"></div>
+  <div id="pgRel" style="display:contents">
   <div class="tabs" id="tabs"></div>
   <div class="toolbar">
     <div class="tgroup">
@@ -288,6 +354,27 @@ textarea.inp{resize:vertical;min-height:54px}
   <section class="tl" id="tl"><div class="loading">Henter produksjoner …</div></section>
   <h2 class="sec">Status per låt</h2>
   <div class="tablewrap" id="table"></div>
+  </div>
+  <div id="pgSome" style="display:contents" hidden>
+    <section class="stats" id="sStats"></section>
+    <div class="toolbar">
+      <div class="tgroup">
+        <button class="btn" type="button" data-sx="calPrev" aria-label="Forrige måned">‹</button>
+        <button class="btn" type="button" data-sx="calToday">Denne måneden</button>
+        <button class="btn" type="button" data-sx="calNext" aria-label="Neste måned">›</button>
+        <span class="range" id="calLbl"></span>
+      </div>
+      <div class="tgroup">
+        <div class="seg" id="calMode" role="group" aria-label="Visning"></div>
+        <label class="inl" for="platF">Plattform <select class="sel" id="platF"></select></label>
+      </div>
+    </div>
+    <div id="calBox"></div>
+    <div class="secrow"><h2 class="sec">Idébank</h2>
+      <div class="ifilter"><label class="inl" for="serF">Serie <select class="sel" id="serF"></select></label><button class="btn" type="button" data-sx="newIdea">+ Ny idé</button></div>
+    </div>
+    <div class="ideas" id="ideaBox"></div>
+  </div>
 </div>
 <div class="lock" id="lock" hidden>
   <form class="lockbox" id="lockForm" autocomplete="off">
@@ -355,10 +442,11 @@ let db = null, local = false;
 let artists = [], songs = [], comments = [];
 let userNs = null, me = null, profCache = {};
 const loaded = {a:false, s:false};
-const view = { artist:"alle", zoom:1, start: mondayOf(todayN - 14), person:"" };
+const view = { artist:"alle", zoom:1, start: mondayOf(todayN - 14), person:"", page:"rel" };
+let posts = [];
 let modal = null; // {kind:'song'|'artist', draft, isNew, focusStep, armed}
 
-function readHash(){ const h=location.hash.replace(/^#/,""); view.artist = h.startsWith("artist-") ? h.slice(7) : "alle"; }
+function readHash(){ const h=location.hash.replace(/^#/,""); view.page = h==="some" ? "some" : "rel"; if(view.page==="rel") view.artist = h.startsWith("artist-") ? h.slice(7) : "alle"; }
 readHash();
 window.addEventListener("hashchange", ()=>{ readHash(); render(); });
 
@@ -403,6 +491,8 @@ function sortedArtists(){ return artists.slice().sort((a,b)=>((dn(a.releaseDate)
 /* ---------- Render ---------- */
 function render(){
   if(view.artist!=="alle" && loaded.a && !artistById(view.artist)) view.artist="alle";
+  renderPage();
+  if(view.page==="some"){ renderSome(); return; }
   renderTabs(); renderToolbar(); renderStats(); renderLegend(); renderTimeline(); renderTable();
 }
 
@@ -604,16 +694,18 @@ async function checkSession(){
   if(data === null || data === undefined){ showLock("Du er logget ut. Skriv inn PIN-koden på nytt."); return false; }
   return data;
 }
-const TABLE = {artist:"prod_artists", song:"prod_songs", comment:"prod_comments"};
+const TABLE = {artist:"prod_artists", song:"prod_songs", comment:"prod_comments", post:"prod_posts"};
 const toRow = {
   artist: a => ({id:a.id, name:a.name, kind:a.kind||"singel", color:a.color||null, dropbox:a.dropbox||null, release_date:a.releaseDate||null, created_at:a.createdAt||Date.now()}),
   song: s => ({id:s.id, artist_id:s.artistId||null, title:s.title, note:s.note||"", release_date:s.releaseDate||null, team:s.team||[], steps:s.steps||[], created_at:s.createdAt||Date.now(), updated_at:Date.now()}),
-  comment: c => ({id:c.id, song_id:c.songId, step_id:c.stepId||null, text:c.text, author:c.sign||null, created_at:c.createdAt||Date.now()})
+  comment: c => ({id:c.id, song_id:c.songId, step_id:c.stepId||null, text:c.text, author:c.sign||null, created_at:c.createdAt||Date.now()}),
+  post: x => ({id:x.id, kind:x.kind||"post", title:x.title||"", date:x.date||null, platforms:x.platforms||[], format:x.format||null, status:x.status||"planlagt", song_id:x.songId||null, series:x.series||null, caption:x.caption||"", who:x.who||null, link:x.link||null, note:x.note||"", created_at:x.createdAt||Date.now(), updated_at:Date.now()})
 };
 const fromRow = {
   artist: r => ({id:r.id, name:r.name, kind:r.kind||"singel", color:r.color||"#9a95ad", dropbox:r.dropbox||"", releaseDate:r.release_date||"", createdAt:Number(r.created_at)||0}),
   song: r => ({id:r.id, artistId:r.artist_id||"", title:r.title, note:r.note||"", releaseDate:r.release_date||"", team:Array.isArray(r.team)?r.team:[], steps:Array.isArray(r.steps)?r.steps:[], createdAt:Number(r.created_at)||0, updatedAt:Number(r.updated_at)||0}),
-  comment: r => ({id:r.id, songId:r.song_id, stepId:r.step_id||"", text:r.text||"", sign:r.author||"", createdAt:Number(r.created_at)||0})
+  comment: r => ({id:r.id, songId:r.song_id, stepId:r.step_id||"", text:r.text||"", sign:r.author||"", createdAt:Number(r.created_at)||0}),
+  post: r => ({id:r.id, kind:r.kind||"post", title:r.title||"", date:r.date||"", platforms:Array.isArray(r.platforms)?r.platforms:[], format:r.format||"", status:r.status||"planlagt", songId:r.song_id||"", series:r.series||"", caption:r.caption||"", who:r.who||"", link:r.link||"", note:r.note||"", createdAt:Number(r.created_at)||0})
 };
 function toast(msg){ const r=$("toastRoot"); r.innerHTML=`<div class="toast" role="status">${esc(msg)}</div>`; clearTimeout(toast.t); toast.t=setTimeout(()=>{r.innerHTML="";},4200); }
 function errMsg(e){
@@ -628,11 +720,11 @@ async function fetchTable(kind){
   const {data, error} = await sb.from(TABLE[kind]).select("*");
   if(error) throw error;
   const list = (data||[]).map(fromRow[kind]);
-  if(kind==="artist") artists = list; else if(kind==="song") songs = list; else comments = list;
+  if(kind==="artist") artists = list; else if(kind==="song") songs = list; else if(kind==="post") posts = list; else comments = list;
 }
 async function refresh(kinds){
   if(!sb) return;
-  kinds = kinds || ["artist","song","comment"];
+  kinds = kinds || ["artist","song","comment","post"];
   try{ await Promise.all(kinds.map(fetchTable)); setBanner(""); }
   catch(e){ setBanner(errMsg(e)); }
   loaded.a = loaded.s = true;
@@ -795,7 +887,7 @@ function renderModal(first){
   const root = $("modalRoot");
   if(!modal){ root.innerHTML=""; return; }
   const mb = $("mb"); const sc = mb ? mb.scrollTop : 0;
-  root.innerHTML = modal.kind==="song" ? songModalHTML() : artistModalHTML();
+  root.innerHTML = modal.kind==="song" ? songModalHTML() : modal.kind==="post" ? postModalHTML() : artistModalHTML();
   const nb = $("mb");
   if(modal.kind==="song") renderComments();
   if(first && modal.kind==="song" && modal.toComments){ const el=$("cmtBlk"); if(el) el.scrollIntoView({block:"start"}); const ta=$("c-text"); if(ta) ta.focus({preventScroll:true}); }
@@ -915,6 +1007,204 @@ document.addEventListener("change", e=>{
   if(t.dataset.step!=null && t.dataset.sf==="type"){ renderModal(); return; }
   if(t.dataset.team!=null && t.dataset.tf==="name"){ renderModal(); return; } // oppdater navnebrikker
   if(t.dataset.step!=null && t.dataset.sf==="start"){ const st=modal.draft.steps[+t.dataset.step]; if(st.start && (!st.end || dn(st.end)<dn(st.start))){ st.end=st.start; renderModal(); } }
+});
+
+/* ---------- Sosiale medier ---------- */
+const PLATS = [
+  {k:"instagram", n:"Instagram", c:"#ff3ea5"},
+  {k:"tiktok",    n:"TikTok",    c:"#28e6e0"},
+  {k:"youtube",   n:"YouTube",   c:"#FF4D4D"},
+  {k:"facebook",  n:"Facebook",  c:"#4D9BFF"},
+  {k:"spotify",   n:"Spotify",   c:"#3DDC97"},
+  {k:"snapchat",  n:"Snapchat",  c:"#FFD166"}
+];
+const FORMATS = ["Reel","Story","Karusell","Bilde","Video","Shorts","Live","Tekst","Annet"];
+const PSTATUS = [["planlagt","Planlagt"],["produseres","Produseres"],["klar","Klar"],["publisert","Publisert"]];
+const platOf = k => PLATS.find(p=>p.k===k) || {k, n:k, c:"#9a95ad"};
+const postColor = x => x.platforms && x.platforms.length ? platOf(x.platforms[0]).c : "#9a95ad";
+const pstatusName = k => (PSTATUS.find(s=>s[0]===k)||PSTATUS[0])[1];
+const platChips = x => (x.platforms||[]).map(k=>`<span class="plat" style="--c:${platOf(k).c}">${esc(platOf(k).n)}</span>`).join("");
+const songTitle = id => ((songs.find(s=>s.id===id)||{}).title) || "";
+const WDAYS = ["man","tir","ons","tor","fre","lør","søn"];
+const sview = { month: null, mode: (window.matchMedia && matchMedia("(max-width:700px)").matches) ? "liste" : "maned", plat:"", series:"" };
+(function(){ const d=new Date(todayN*864e5); sview.month = {y:d.getUTCFullYear(), m:d.getUTCMonth()}; })();
+
+function renderPage(){
+  const some = view.page==="some";
+  document.querySelectorAll(".pages [data-page]").forEach(b=>b.setAttribute("aria-selected", String(b.dataset.page===view.page)));
+  $("pgRel").hidden = some; $("pgSome").hidden = !some;
+  $("newSong").hidden = some; $("newPost").hidden = !some; $("newIdea").hidden = !some;
+  $("pageTitle").innerHTML = some ? `Sosiale <em>medier</em>` : `Produksjon &amp; <em>release</em>`;
+  document.title = some ? "Døgndrømmer studio · Sosiale medier" : "Døgndrømmer studio";
+}
+const calPosts = () => posts.filter(x=>x.kind!=="ide" && (!sview.plat || (x.platforms||[]).includes(sview.plat)));
+const ideaPosts = () => posts.filter(x=>x.kind==="ide" && (!sview.series || (x.series||"")===sview.series)).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+
+function renderSome(){
+  const cp = calPosts();
+  const wk = cp.filter(x=>{ const n=dn(x.date); return n!=null && n>=todayN && n<=todayN+6; });
+  const m0 = Math.round(Date.UTC(sview.month.y, sview.month.m, 1)/864e5), m1 = Math.round(Date.UTC(sview.month.y, sview.month.m+1, 1)/864e5)-1;
+  const inMonth = cp.filter(x=>{ const n=dn(x.date); return n!=null && n>=m0 && n<=m1; });
+  const pub = inMonth.filter(x=>x.status==="publisert").length;
+  const notReady = cp.filter(x=>{ const n=dn(x.date); return n!=null && n>=todayN && n<=todayN+3 && (x.status==="planlagt"||x.status==="produseres"); });
+  const nIdeas = posts.filter(x=>x.kind==="ide").length;
+  $("sStats").innerHTML = `
+    <div class="stat"><b>${wk.length}</b><span>innlegg neste 7 dager</span><ul>${wk.sort((a,b)=>dn(a.date)-dn(b.date)).slice(0,3).map(x=>`<li><em>${fmt(x.date)}</em>${esc(x.title||"Uten tittel")}</li>`).join("")}</ul></div>
+    <div class="stat"><b style="color:${notReady.length?"#FF8A8A":"inherit"}">${notReady.length}</b><span>ikke klare, ut innen 3 dager</span><ul>${notReady.slice(0,3).map(x=>`<li><em>${fmt(x.date)}</em>${esc(x.title||"Uten tittel")}</li>`).join("")}</ul></div>
+    <div class="stat"><b>${pub}<span style="font-size:16px;color:var(--muted)"> / ${inMonth.length}</span></b><span>publisert i ${MONL[sview.month.m]}</span></div>
+    <div class="stat"><b>${nIdeas}</b><span>idéer i banken</span></div>`;
+  $("calLbl").textContent = MONL[sview.month.m].replace(/^./,c=>c.toUpperCase()) + " " + sview.month.y;
+  $("calMode").innerHTML = [["maned","Måned"],["liste","Liste"]].map(([k,l])=>`<button type="button" data-sx="mode" data-v="${k}" aria-pressed="${sview.mode===k}">${l}</button>`).join("");
+  $("platF").innerHTML = `<option value="">Alle</option>` + PLATS.map(p=>`<option value="${p.k}" ${sview.plat===p.k?"selected":""}>${p.n}</option>`).join("");
+  const sers = [...new Set(posts.filter(x=>x.kind==="ide" && x.series).map(x=>x.series))].sort((a,b)=>a.localeCompare(b,"nb"));
+  if(sview.series && !sers.includes(sview.series)) sview.series="";
+  $("serF").innerHTML = `<option value="">Alle</option>` + sers.map(v=>`<option ${sview.series===v?"selected":""}>${esc(v)}</option>`).join("");
+  $("calBox").innerHTML = sview.mode==="maned" ? monthHTML(cp, m0, m1) : listHTML(cp, m0, m1);
+  renderIdeas();
+}
+function relDays(){ // releasedatoer fra produksjonssiden
+  const m = new Map();
+  for(const s of songs){ const d=relOf(s); if(d) m.set(dn(d), (m.get(dn(d))||[]).concat(s.title)); }
+  for(const a of artists){ if(a.releaseDate) m.set(dn(a.releaseDate), (m.get(dn(a.releaseDate))||[]).concat(a.name)); }
+  return m;
+}
+function monthHTML(cp, m0, m1){
+  const start = mondayOf(m0), end = mondayOf(m1)+6, rel = relDays();
+  const by = new Map(); for(const x of cp){ const n=dn(x.date); if(n==null) continue; if(!by.has(n)) by.set(n,[]); by.get(n).push(x); }
+  let h = `<div class="cal"><div class="cal-h">${WDAYS.map(d=>`<div>${d}</div>`).join("")}</div><div class="cal-g">`;
+  for(let n=start; n<=end; n++){
+    const d = new Date(n*864e5).getUTCDate();
+    const list = (by.get(n)||[]).sort((a,b)=>(a.createdAt||0)-(b.createdAt||0));
+    const r = rel.get(n);
+    h += `<div class="day ${n<m0||n>m1?"out":""} ${n===todayN?"now":""}" data-sx="newOn" data-d="${isoOf(n)}" title="Nytt innlegg ${fmt(isoOf(n))}">
+      <div class="dnum"><b>${d}</b>${r?`<span class="relday" title="${esc(r.join(", "))}">★ Release</span>`:""}</div>
+      ${list.map(x=>`<button type="button" class="post ${esc(x.status)}" style="--c:${postColor(x)}" data-sx="open" data-id="${esc(x.id)}"><span>${esc(x.title||"Uten tittel")}</span><small>${esc([x.format, (x.platforms||[]).map(k=>platOf(k).n).join(" + ")].filter(Boolean).join(" · "))}</small></button>`).join("")}
+    </div>`;
+  }
+  return h + `</div></div>`;
+}
+function prowHTML(x){
+  const n = dn(x.date);
+  const dt = n==null ? `<b>–</b>uten dato` : `<b>${new Date(n*864e5).getUTCDate()}.</b>${WDAYS[wd(n)]} ${MON[new Date(n*864e5).getUTCMonth()]}`;
+  return `<button type="button" class="prow" style="--c:${postColor(x)}" data-sx="open" data-id="${esc(x.id)}">
+    <span class="dt">${dt}</span>
+    <span><span class="tt">${esc(x.title||"Uten tittel")}</span><span class="meta">${platChips(x)}${x.format?`<span>${esc(x.format)}</span>`:""}${x.songId&&songTitle(x.songId)?`<span>♪ ${esc(songTitle(x.songId))}</span>`:""}${x.who?`<span>· ${esc(x.who)}</span>`:""}</span></span>
+    <span class="st ${esc(x.status)}">${esc(pstatusName(x.status))}</span>
+  </button>`;
+}
+function listHTML(cp, m0, m1){
+  const inM = cp.filter(x=>{ const n=dn(x.date); return n!=null && n>=m0 && n<=m1; }).sort((a,b)=>dn(a.date)-dn(b.date)||(a.createdAt||0)-(b.createdAt||0));
+  const noDate = cp.filter(x=>dn(x.date)==null);
+  if(!inM.length && !noDate.length) return `<div class="cal"><div class="empty"><h2>Ingen innlegg i ${MONL[sview.month.m]}</h2><span>Planlegg det første, eller hent en idé fra idébanken under.</span><button class="btn primary" type="button" data-sx="newPost">+ Nytt innlegg</button></div></div>`;
+  const weeks = new Map(); for(const x of inM){ const w=mondayOf(dn(x.date)); if(!weeks.has(w)) weeks.set(w,[]); weeks.get(w).push(x); }
+  let h = `<div class="plist">`;
+  for(const [w,list] of weeks) h += `<div><div class="wkh">Uke ${isoWeek(w)} · ${fmt(isoOf(w))} – ${fmt(isoOf(w+6))}</div>${list.map(prowHTML).join("")}</div>`;
+  if(noDate.length) h += `<div><div class="wkh">Uten dato</div>${noDate.map(prowHTML).join("")}</div>`;
+  return h + `</div>`;
+}
+function renderIdeas(){
+  const list = ideaPosts();
+  $("ideaBox").innerHTML = list.length ? list.map(x=>`<div class="idea">
+      ${x.series?`<span class="series">${esc(x.series)}</span>`:""}
+      <h4>${esc(x.title||"Uten tittel")}</h4>
+      ${x.note?`<p>${esc(x.note)}</p>`:""}
+      <div class="row2">${platChips(x)}${x.format?`<span class="hint">${esc(x.format)}</span>`:""}${x.songId&&songTitle(x.songId)?`<span class="hint">♪ ${esc(songTitle(x.songId))}</span>`:""}</div>
+      <div class="acts"><button class="btn primary" type="button" data-sx="plan" data-id="${esc(x.id)}">Planlegg</button><button class="btn" type="button" data-sx="open" data-id="${esc(x.id)}">Rediger</button></div>
+    </div>`).join("")
+    : `<div class="empty" style="grid-column:1/-1;border:1px dashed var(--line);border-radius:14px"><h2>Idébanken er tom</h2><span>Samle idéer til innlegg, serier og kampanjer her. Når en idé er klar, trykker du «Planlegg», så havner den i kalenderen.</span><button class="btn primary" type="button" data-sx="newIdea">+ Ny idé</button></div>`;
+}
+
+/* Modal: innlegg / idé */
+function openPost(id, opts){
+  opts = opts || {};
+  const x = posts.find(p=>p.id===id);
+  if(x && !opts.plan){ modal = {kind:"post", draft:clone(x), isNew:false, armed:false}; }
+  else if(x && opts.plan){ modal = {kind:"post", draft:{...clone(x), kind:"post", status:"planlagt", date: x.date || isoOf(todayN)}, isNew:false, armed:false, fromIdea:true}; }
+  else {
+    const isIdea = opts.kind==="ide";
+    modal = {kind:"post", draft:{id:uid("p"), kind: isIdea?"ide":"post", title:"", date: isIdea?"":(opts.date||isoOf(todayN)), platforms:[], format:"", status: isIdea?"ide":"planlagt", songId:"", series:"", caption:"", who:"", link:"", note:"", createdAt:Date.now()}, isNew:true, armed:false};
+  }
+  renderModal(true);
+  if(modal && modal.isNew){ const f=$("p-title"); if(f) f.focus(); }
+}
+function postModalHTML(){
+  const d = modal.draft, idea = d.kind==="ide";
+  const songOpts = `<option value="">Ingen</option>` + songs.slice().sort((a,b)=>a.title.localeCompare(b.title,"nb")).map(s=>`<option value="${esc(s.id)}" ${s.id===d.songId?"selected":""}>${esc(s.title)}</option>`).join("");
+  const sers = [...new Set(posts.map(x=>x.series).filter(Boolean))];
+  const whos = [...new Set([...posts.map(x=>x.who).filter(Boolean), ...songs.flatMap(s=>(s.team||[]).map(m=>m.name)).filter(Boolean)])];
+  const title = modal.isNew ? (idea?"Ny idé":"Nytt innlegg") : modal.fromIdea ? "Planlegg idé" : (idea?"Rediger idé":"Rediger innlegg");
+  return `<div class="scrim" data-act="close"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" style="width:min(640px,100%)">
+    <div class="mh"><h3 id="mTitle">${title}</h3><button class="x" type="button" data-act="close" aria-label="Lukk">×</button></div>
+    <div class="mb" id="mb">
+      <div class="field"><label for="p-title">${idea?"Idé":"Tittel"}</label><input class="inp" id="p-title" data-pf="title" value="${esc(d.title)}" placeholder="${idea?"F.eks. «Fra demo til master» i 5 deler":"F.eks. Teaser: refrenget i «Million»"}"></div>
+      ${idea?"":`<div class="grid2" style="grid-template-columns:1fr 1fr">
+        <div class="field"><label for="p-date">Publiseres</label><input class="inp" type="date" id="p-date" data-pf="date" value="${esc(d.date||"")}"></div>
+        <div class="field"><span class="flabel">Status</span><div class="stseg" role="group" aria-label="Status">${PSTATUS.map(([k,l])=>`<button type="button" data-sx="pstatus" data-v="${k}" aria-pressed="${d.status===k}">${l}</button>`).join("")}</div></div>
+      </div>`}
+      <div class="field"><span class="flabel">Plattform</span><div class="chips">${PLATS.map(p=>`<button type="button" class="chip" data-sx="plat" data-v="${p.k}" aria-pressed="${(d.platforms||[]).includes(p.k)}" style="${(d.platforms||[]).includes(p.k)?`background:${p.c};color:#07080d`:""}">${p.n}</button>`).join("")}</div></div>
+      <div class="grid2" style="grid-template-columns:1fr 1fr">
+        <div class="field"><label for="p-format">Format</label><select class="inp" id="p-format" data-pf="format"><option value="">Velg …</option>${FORMATS.map(f=>`<option ${d.format===f?"selected":""}>${f}</option>`).join("")}</select></div>
+        <div class="field"><label for="p-song">Låt</label><select class="inp" id="p-song" data-pf="songId">${songOpts}</select></div>
+      </div>
+      <div class="grid2" style="grid-template-columns:1fr 1fr">
+        <div class="field"><label for="p-series">Serie / kampanje</label><input class="inp" id="p-series" data-pf="series" value="${esc(d.series||"")}" list="dl-series" placeholder="Valgfritt"></div>
+        <div class="field"><label for="p-who">Ansvarlig</label><input class="inp" id="p-who" data-pf="who" value="${esc(d.who||"")}" list="dl-who" placeholder="Hvem lager den?"></div>
+      </div>
+      ${idea?"":`<div class="field"><label for="p-cap">Tekst / caption</label><textarea class="inp" id="p-cap" data-pf="caption" rows="4" placeholder="Caption, hashtags og CTA">${esc(d.caption||"")}</textarea></div>`}
+      <div class="field"><label for="p-note">${idea?"Beskrivelse":"Notat"}</label><textarea class="inp" id="p-note" data-pf="note" rows="3" placeholder="${idea?"Hva er idéen? Referanser, vinkling, hook …":"Opptak, rekvisitter, lenke til råfiler …"}">${esc(d.note||"")}</textarea></div>
+      ${idea?"":`<div class="field"><label for="p-link">Lenke til innlegget</label><input class="inp" id="p-link" data-pf="link" type="url" inputmode="url" value="${esc(d.link||"")}" placeholder="https://www.instagram.com/p/…">${safeUrl(d.link)?`<a class="hint" href="${esc(safeUrl(d.link))}" target="_blank" rel="noopener noreferrer">Åpne innlegget ↗</a>`:""}</div>`}
+    </div>
+    <div class="mf">
+      <div>${modal.isNew?"":`<button class="btn danger ${modal.armed?"armed":""}" type="button" data-sx="pdel">${modal.armed?"Trykk igjen for å slette":(idea?"Slett idé":"Slett innlegg")}</button>`}</div>
+      <div class="r">${idea && !modal.isNew?`<button class="btn" type="button" data-sx="toPlan">Planlegg</button>`:""}<button class="btn" type="button" data-act="close">Avbryt</button><button class="btn primary" type="button" data-sx="psave">Lagre</button></div>
+    </div>
+  </div></div>
+  <datalist id="dl-series">${sers.map(v=>`<option value="${esc(v)}">`).join("")}</datalist>
+  <datalist id="dl-who">${whos.map(v=>`<option value="${esc(v)}">`).join("")}</datalist>`;
+}
+const savePost   = x  => write("post", "upsert", toRow.post(x));
+const deletePost = id => write("post", "delete", id);
+
+document.addEventListener("click", async e=>{
+  const pg = e.target.closest(".pages [data-page]");
+  if(pg && !modal){ location.hash = pg.dataset.page==="some" ? "some" : (view.artist && view.artist!=="alle" ? "artist-"+view.artist : "alle"); return; }
+  const t = e.target.closest("[data-sx]"); if(!t) return;
+  const a = t.dataset.sx;
+  if(!modal){
+    if(a==="open"){ e.stopPropagation(); openPost(t.dataset.id); return; }
+    if(a==="plan"){ openPost(t.dataset.id, {plan:true}); return; }
+    if(a==="newPost"){ openPost(null, {}); return; }
+    if(a==="newIdea"){ openPost(null, {kind:"ide"}); return; }
+    if(a==="newOn"){ if(e.target.closest(".post")) return; openPost(null, {date:t.dataset.d}); return; }
+    if(a==="calPrev"||a==="calNext"){ const m=sview.month.m+(a==="calNext"?1:-1); sview.month = {y: sview.month.y + Math.floor(m/12), m: ((m%12)+12)%12}; renderSome(); return; }
+    if(a==="calToday"){ const d=new Date(todayN*864e5); sview.month={y:d.getUTCFullYear(), m:d.getUTCMonth()}; renderSome(); return; }
+    if(a==="mode"){ sview.mode=t.dataset.v; renderSome(); return; }
+    return;
+  }
+  if(modal.kind!=="post") return;
+  const d = modal.draft;
+  if(a==="plat"){ const k=t.dataset.v; d.platforms = (d.platforms||[]).includes(k) ? d.platforms.filter(x=>x!==k) : [...(d.platforms||[]), k]; renderModal(); return; }
+  if(a==="pstatus"){ d.status=t.dataset.v; renderModal(); return; }
+  if(a==="toPlan"){ d.kind="post"; d.status="planlagt"; if(!d.date) d.date=isoOf(todayN); modal.fromIdea=true; renderModal(); return; }
+  if(a==="pdel"){ if(!modal.armed){ modal.armed=true; renderModal(); return; } const id=d.id; closeModal(); await deletePost(id); return; }
+  if(a==="psave"){
+    d.title=(d.title||"").trim(); if(!d.title){ toast(d.kind==="ide"?"Skriv inn idéen.":"Gi innlegget en tittel."); const f=$("p-title"); if(f) f.focus(); return; }
+    d.link=(d.link||"").trim(); if(d.link && !/^https?:\/\//i.test(d.link)) d.link="https://"+d.link;
+    if(d.link && !safeUrl(d.link)){ toast("Lenken må starte med https:// og kan ikke ha mellomrom."); return; }
+    d.series=(d.series||"").trim(); d.who=(d.who||"").trim();
+    t.disabled=true; t.textContent="Lagrer …";
+    const ok = await savePost(d);
+    if(ok){ const n=dn(d.date); if(d.kind!=="ide" && n!=null){ const dd=new Date(n*864e5); sview.month={y:dd.getUTCFullYear(), m:dd.getUTCMonth()}; } closeModal(); render(); }
+    else { t.disabled=false; t.textContent="Lagre"; }
+    return;
+  }
+});
+document.addEventListener("input", e=>{ const t=e.target; if(modal && modal.kind==="post" && t.dataset.pf){ modal.draft[t.dataset.pf]=t.value; } });
+document.addEventListener("change", e=>{
+  const t=e.target;
+  if(t.id==="platF"){ sview.plat=t.value; renderSome(); return; }
+  if(t.id==="serF"){ sview.series=t.value; renderIdeas(); return; }
+  if(modal && modal.kind==="post" && t.dataset.pf){ modal.draft[t.dataset.pf]=t.value; }
 });
 
 /* ---------- Oppstart ---------- */

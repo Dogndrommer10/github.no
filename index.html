@@ -40,7 +40,8 @@
     position:fixed; top:0; left:0; right:0; z-index:40;
     display:flex; align-items:center; justify-content:space-between;
     padding:14px 22px;
-    background:linear-gradient(180deg, rgba(7,8,13,.85), rgba(7,8,13,0));
+    background:rgba(7,8,13,.82);
+    -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
   }
   nav .brand{display:block}
   nav .brand img{
@@ -111,7 +112,7 @@
   @keyframes breathe{0%,100%{opacity:.3}50%{opacity:.85}}
 
   /* ---------- SECTIONS ---------- */
-  section{padding:110px 22px}
+  section[id]{padding:64px 22px; scroll-margin-top:56px}
   .wrap{max-width:1060px; margin:0 auto}
   .kicker{
     font-family:var(--hud); font-size:11px; letter-spacing:.4em;
@@ -244,7 +245,7 @@
 
   /* ---------- RESPONSIVT ---------- */
   @media (max-width:820px){
-    section{padding:80px 18px}
+    section[id]{padding:44px 18px}
     .musikk-grid{grid-template-columns:1fr; gap:32px}
     .cover{max-width:340px; margin:0 auto}
     #om .duo{grid-template-columns:1fr}

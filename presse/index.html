@@ -42,7 +42,7 @@
 
   header{padding:56px 22px 8px}
   .wrap{max-width:1060px; margin:0 auto}
-  section{padding:48px 22px}
+  section{padding:48px 22px; scroll-margin-top:56px}
   .kicker{font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:var(--pink-soft); margin-bottom:10px}
   .kicker.teal{color:var(--teal-soft)}
   h1,h2{font-family:var(--display); font-weight:700; color:#fdeef8; letter-spacing:-.015em; text-shadow:0 0 18px rgba(255,62,165,.3)}
@@ -101,6 +101,12 @@
   .shot .meta a{color:var(--teal-soft); text-decoration:none; letter-spacing:.12em; text-transform:uppercase; font-size:11px}
   .shot .meta a:hover{color:#fff}
   .note{color:var(--dim); font-size:14px; margin-top:16px}
+  .series{margin:34px 0 14px; font-size:22px}
+  .series:first-of-type{margin-top:0}
+  .series span{font-family:var(--sans); font-weight:400; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin-left:10px}
+  .shot.sq .img{aspect-ratio:1/1}
+  .hl{display:grid; grid-template-columns:minmax(0,320px) 1fr; gap:40px; align-items:center}
+  .hl-img{border-radius:12px; overflow:hidden; box-shadow:0 10px 44px rgba(255,62,165,.35)}
 
   /* logo */
   .logos{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
@@ -129,6 +135,8 @@
     header{padding:36px 18px 0}
     section{padding:36px 18px}
     .rel{grid-template-columns:1fr; gap:24px}
+    .hl{grid-template-columns:1fr; gap:24px}
+    .hl-img{max-width:320px}
     .rel .cover{max-width:260px}
     .bio{padding:20px 18px 18px}
     .grid{grid-template-columns:1fr 1fr; gap:10px}
@@ -156,6 +164,19 @@
   </div>
 </header>
 
+<!-- ============ HØYDEPUNKT ============ -->
+<section id="nmf">
+  <div class="wrap hl">
+    <div class="hl-img"><img src="web/new-music-friday.jpg" alt="Døgndrømmer på New Music Friday Norway" loading="lazy"></div>
+    <div>
+      <div class="kicker">Høydepunkt</div>
+      <h2>«Million» på New Music Friday Norway</h2>
+      <p class="lead">Singelen «Million» ble plukket ut til Spotifys redaksjonelle spilleliste New Music Friday Norway.</p>
+      <div class="row"><a class="pill teal" href="hd/new-music-friday.jpg" download="Dogndrommer-New-Music-Friday.jpg">↓ Last ned bildet</a></div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FAKTA ============ -->
 <section id="fakta">
   <div class="wrap">
@@ -165,7 +186,7 @@
       <div class="fact"><dt>Sjanger</dt><dd>Synthpop / synthwave</dd></div>
       <div class="fact"><dt>Fra</dt><dd>Drammen, Norge</dd></div>
       <div class="fact"><dt>Medlemmer</dt><dd>Anniken Kullebund — vokal, tekst<br>Christian Sanders — vokal, produksjon, tekst</dd></div>
-      <div class="fact"><dt>Siste singel</dt><dd>«Million» — listet på New Music Friday</dd></div>
+      <div class="fact"><dt>Siste singel</dt><dd>«Million» — listet på New Music Friday Norway</dd></div>
       <div class="fact"><dt>Kommer</dt><dd>Debutalbumet «Døgndrøm»</dd></div>
       <div class="fact"><dt>Booking &amp; presse</dt><dd><a href="mailto:christian@dogndrommer.no">christian@dogndrommer.no</a></dd></div>
     </dl>
@@ -190,7 +211,7 @@
       <div id="bio-lang">
         <p>Døgndrømmer er et norsk synthpop-prosjekt som blander nostalgiske 80-tallssynths, EDM og store, fengende refrenger. Inspirert av neonbelyste motorveier, VHS-estetikk og følelsen av å være fanget i et univers fra 1986, skaper duoen et univers der moderne pop møter retrodrømmer.</p>
         <p>Bak prosjektet står Anniken Kullebund og Christian Sanders. Anniken var semifinalist i International Songwriting Competition i 2019 og har skrevet musikk siden hun var tolv. Christian har bakgrunn fra Ess i Ermet, med gull- og platinasalg, radiospilling og over 1000 konserter. I Døgndrømmer bygger han låter og visuelle verdener der 80-tallsnostalgi møter moderne pop.</p>
-        <p>Singelen «Million» ble listet på New Music Friday, og duoen jobber nå mot debutalbumet «Døgndrøm».</p>
+        <p>Singelen «Million» ble listet på Spotifys New Music Friday Norway, og duoen jobber nå mot debutalbumet «Døgndrøm».</p>
       </div>
     </div>
   </div>
@@ -225,6 +246,9 @@
   <div class="wrap">
     <div class="kicker">Høy oppløsning</div>
     <h2>Pressebilder</h2>
+    <h3 class="series">Arkade <span>2026 · ny fotoserie</span></h3>
+    <div class="grid" id="grid-ny"></div>
+    <h3 class="series">Neon-natt <span>fotoserie</span></h3>
     <div class="grid" id="grid"></div>
     <p class="note">Bildene kan brukes fritt i omtale av Døgndrømmer.</p>
   </div>
@@ -270,10 +294,22 @@
     ["bilde-11","Fotoserie 4",0],["bilde-12","Fotoserie 5",0],["bilde-13","Fotoserie 6",0],
     ["bilde-14","Fotoserie 7",0],["bilde-15","Fotoserie 8",1]
   ];
+  var NEW = [
+    ["arkade-1","Arkade 1",1],["arkade-2","Arkade 2",1],["arkade-3","Arkade 3",1],
+    ["arkade-logo","Arkade med logo",1],["million-promo","«Million»-promo",2]
+  ];
+  var gridNy = document.getElementById('grid-ny');
+  NEW.forEach(function(p){
+    var d = document.createElement('div'); d.className = 'shot ' + (p[2] === 2 ? 'sq' : 'tall');
+    d.innerHTML = '<div class="img"><img loading="lazy" alt="Døgndrømmer — ' + p[1] + '" src="web/' + p[0] + '.jpg"></div>' +
+      '<div class="meta"><span>' + p[1] + '</span><a href="hd/' + p[0] + '.jpg" download="Dogndrommer-' + p[0] + '.jpg">↓ Last ned</a></div>';
+    gridNy.appendChild(d);
+  });
+
   var grid = document.getElementById('grid');
   PHOTOS.forEach(function(p, i){
     var src = '../img/' + p[0] + '.jpg';
-    var name = 'Dogndrommer-presse-' + String(i+1).padStart(2,'0') + '.jpg';
+    var name = 'Dogndrommer-neon-natt-' + String(i+1).padStart(2,'0') + '.jpg';
     var d = document.createElement('div'); d.className = 'shot' + (p[2] ? ' tall' : '');
     d.innerHTML = '<div class="img"><img loading="lazy" alt="Døgndrømmer — ' + p[1] + '" src="' + src + '"></div>' +
       '<div class="meta"><span>' + p[1] + '</span><a href="' + src + '" download="' + name + '">↓ Last ned</a></div>';
